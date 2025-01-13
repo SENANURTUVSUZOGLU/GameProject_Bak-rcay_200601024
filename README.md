@@ -1,4 +1,4 @@
-İzmir Bakırçay Üniversitesi - Bilgisayar Mühendisliği - Oyun Programlama 
+İzmir Bakırçay Üniversitesi - Bilgisayar Mühendisliği - Oyun Programlama
 Sena Nur Tüvsüzoğlu - 200601024
 Final projesinden elde edilen oyunun linki ektedir. 
 https://senanurtuvsuzoglu.github.io/bakircay-2024-gd-200601024/
