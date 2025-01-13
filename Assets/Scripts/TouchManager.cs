@@ -13,6 +13,7 @@ namespace Common
     public class TouchManager : MonoBehaviour
     {
         private static TouchManager _instance;
+
         public static TouchManager Instance
         {
             get
@@ -20,11 +21,13 @@ namespace Common
                 if (_instance == null)
                 {
                     _instance = FindObjectOfType<TouchManager>();
+
+                    if (_instance == null)
+                    {
+                        Debug.LogWarning("TouchManager not found in scene");
+                    }
                 }
-                if (_instance == null)
-                {
-                    Debug.LogError("TouchManager not found in scene");
-                }
+
                 return _instance;
             }
         }
@@ -56,64 +59,51 @@ namespace Common
             }
             else if (Input.GetMouseButton(0))
             {
-                if (_currentTouchData.hasValue == false)
+                if (!_currentTouchData.hasValue)
                 {
                     TouchBegan(Input.mousePosition);
                     return;
-                };
+                }
 
                 TouchMoved(Input.mousePosition);
-
             }
             else if (Input.GetMouseButtonUp(0))
             {
-                if (_currentTouchData.hasValue == false)
+                if (!_currentTouchData.hasValue)
                 {
                     return;
-                };
+                }
+
                 TouchEnded(Input.mousePosition);
             }
         }
 
-
         private void TouchBegan(Vector2 position)
         {
-            var data = new TouchData()
-            {
-                hasValue = true,
-                position = position,
-                deltaPosition = Vector2.zero
-            };
-
-            _currentTouchData = data;
+            _currentTouchData = CreateTouchData(position, true);
             OnTouchBegan?.Invoke(_currentTouchData);
         }
 
-
         private void TouchMoved(Vector2 position)
         {
-            var data = new TouchData()
-            {
-                hasValue = true,
-                position = position,
-                deltaPosition = position - _currentTouchData.position
-            };
-
-            _currentTouchData = data;
+            _currentTouchData = CreateTouchData(position, true);
             OnTouchMoved?.Invoke(_currentTouchData);
         }
 
         private void TouchEnded(Vector2 position)
         {
-            var data = new TouchData()
-            {
-                hasValue = false,
-                position = position,
-                deltaPosition = position - _currentTouchData.position
-            };
-
-            _currentTouchData = data;
+            _currentTouchData = CreateTouchData(position, false);
             OnTouchEnded?.Invoke(_currentTouchData);
+        }
+
+        private TouchData CreateTouchData(Vector2 position, bool hasValue)
+        {
+            return new TouchData()
+            {
+                hasValue = hasValue,
+                position = position,
+                deltaPosition = hasValue ? position - _currentTouchData.position : Vector2.zero
+            };
         }
     }
 }
