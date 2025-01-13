@@ -35,4 +35,4 @@ webgl dönüşümünden sonra butonlarda unity  editöredekinden farklı olarak 
  
 ![x](https://github.com/user-attachments/assets/df2597ae-4801-4ee3-9ef8-ccd91fe8648d)
 
-webgl dönüşümünden kaynaklı olarak blackhole butona basıldığında arada bu hata alınıp oyun durmakta. Bu unity editöre alınmayan bir hatadır.  
+webgl dönüşümünden kaynaklı olarak blackhole butona basıldığında arada bu hata alınıp oyun durmakta. Blackhole unity editörde çalışmaktaydı. 
